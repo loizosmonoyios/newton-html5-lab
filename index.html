@@ -5,21 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>STEAM Φυσική — Νόμοι Νεύτωνα (Κεκλιμένο + 3ος Νόμος)</title>
   <style>
-    :root{
-      --bg:#0b1220; --panel:#0f1a2e; --text:#eaf2ff; --muted:rgba(234,242,255,.72);
-      --border:rgba(234,242,255,.14); --shadow:0 10px 30px rgba(0,0,0,.35); --r:16px;
-      --cyan:#7dd3fc; --mint:#a7f3d0; --amber:#fbbf24; --rose:#fb7185; --violet:#c4b5fd;
-    }
+    :root{--bg:#0b1220;--panel:#0f1a2e;--text:#eaf2ff;--muted:rgba(234,242,255,.72);--border:rgba(234,242,255,.14);--shadow:0 10px 30px rgba(0,0,0,.35);--r:16px}
     *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:
-        radial-gradient(1200px 600px at 10% 10%, rgba(125,211,252,.16), transparent 60%),
-        radial-gradient(900px 500px at 90% 25%, rgba(167,243,208,.12), transparent 60%),
-        var(--bg);
-      color:var(--text);
-    }
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(1200px 600px at 10% 10%, rgba(125,211,252,.16), transparent 60%),radial-gradient(900px 500px at 90% 25%, rgba(167,243,208,.12), transparent 60%),var(--bg);color:var(--text)}
     header{max-width:1220px;margin:0 auto;padding:18px 16px 10px}
     h1{font-size:1.25rem;margin:0 0 6px}
     header p{margin:0;color:var(--muted);line-height:1.35}
@@ -31,24 +19,15 @@
     .content{padding:12px 14px}
     canvas{width:100%;height:auto;display:block;background:rgba(0,0,0,.20)}
     .tabs{display:flex;gap:10px;flex-wrap:wrap}
-    .tab{
-      border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text);
-      padding:8px 12px; border-radius:999px; cursor:pointer;
-    }
-    .tab.active{border-color:rgba(125,211,252,.55); background:rgba(125,211,252,.10)}
+    .tab{border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--text);padding:8px 12px;border-radius:999px;cursor:pointer}
+    .tab.active{border-color:rgba(125,211,252,.55);background:rgba(125,211,252,.10)}
     .row{display:grid;grid-template-columns:220px 1fr 130px;gap:10px;align-items:center;margin:10px 0}
     input[type="range"]{width:100%}
     .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
     .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    button{
-      border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text);
-      padding:9px 12px; border-radius:12px; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,.25)
-    }
+    button{border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--text);padding:9px 12px;border-radius:12px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.25)}
     button:hover{background:rgba(255,255,255,.07)}
-    button.cyan{border-color:rgba(125,211,252,.55)}
-    button.mint{border-color:rgba(167,243,208,.55)}
-    button.amber{border-color:rgba(251,191,36,.55)}
-    button.rose{border-color:rgba(251,113,133,.55)}
+    button.cyan{border-color:rgba(125,211,252,.55)} button.mint{border-color:rgba(167,243,208,.55)} button.amber{border-color:rgba(251,191,36,.55)} button.rose{border-color:rgba(251,113,133,.55)}
     .kpi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
     .kpi .box{border:1px dashed var(--border);border-radius:14px;padding:10px;background:rgba(0,0,0,.18)}
     .kpi .box b{display:block;font-size:.92rem;color:var(--muted);margin-bottom:4px}
@@ -58,19 +37,23 @@
     summary{cursor:pointer;color:var(--text);font-weight:650}
     .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .small{font-size:.92rem}
+    code{background:rgba(0,0,0,.25);padding:0 6px;border-radius:8px}
+  
+    .pm{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;
+        border:1px solid rgba(234,242,255,.22);background:rgba(0,0,0,.22);color:var(--text);
+        cursor:pointer;font-weight:800;font-size:16px;line-height:1;box-shadow:none;padding:0}
+    .pm:hover{background:rgba(255,255,255,.08)}
+    .pmwrap{display:flex;align-items:center;gap:8px}
+    .pmwrap input[type="range"]{flex:1}
   </style>
 </head>
 <body>
 <header>
   <h1>Νόμοι Νεύτωνα — Προσομοίωση HTML5 (Κεκλιμένο επίπεδο + 3ος Νόμος)</h1>
-  <p>
-    Δύο λειτουργίες: <b>Κεκλιμένο</b> (στατική/κινητική τριβή + βέλη δυνάμεων) και <b>3ος Νόμος</b> (δύο σώματα με δράση–αντίδραση).
-    Οι μαθητές αλλάζουν τιμές από sliders ή από <span class="mono">STUDENT PARAMETERS</span>.
-  </p>
+  <p>Δύο λειτουργίες: <b>Κεκλιμένο</b> (στατική/κινητική τριβή + βέλη δυνάμεων) και <b>3ος Νόμος</b> (δύο σώματα με δράση–αντίδραση). Για την τάξη χρησιμοποιήστε τα <b>sliders</b>. Για προγραμματισμό, αλλάξτε μόνο το <b>STUDENT ZONE</b> (στον κώδικα).</p>
 </header>
 
 <div class="wrap">
-  <!-- LEFT -->
   <section class="card">
     <div class="hd">
       <div class="tabs">
@@ -84,8 +67,8 @@
 
     <div class="content">
       <div class="btns" id="controlsIncline">
-        <button class="cyan" id="pushUpBtn">Σπρώξε προς τα ΠΑΝΩ</button>
-        <button class="amber" id="pushDownBtn">Σπρώξε προς τα ΚΑΤΩ</button>
+        <button class="cyan" id="pushUpBtn">Σπρώξε ΔΕΞΙΑ</button>
+        <button class="amber" id="pushDownBtn">Σπρώξε ΑΡΙΣΤΕΡΑ</button>
         <button class="mint" id="togglePushBtn">Ώθηση: ON</button>
         <button id="pauseBtn">Παύση</button>
         <button id="resetBtn">Επαναφορά</button>
@@ -102,16 +85,16 @@
 
       <div class="kpi" id="kpiIncline">
         <div class="box"><b>N = m·g·cosθ</b><span class="mono" id="Nval">—</span></div>
-        <div class="box"><b>F<sub>g,‖</sub> = m·g·sinθ (κάτω)</b><span class="mono" id="Fgval">—</span></div>
+        <div class="box"><b>F_g,‖ = m·g·sinθ</b><span class="mono" id="Fgval">—</span></div>
         <div class="box"><b>Όριο στατικής μs·N</b><span class="mono" id="FsmaxVal">—</span></div>
         <div class="box"><b>Τριβή κινητική μk·N</b><span class="mono" id="FkVal">—</span></div>
-        <div class="box"><b>F<sub>net,‖</sub></b><span class="mono" id="FnetVal">—</span></div>
+        <div class="box"><b>F_net,‖</b><span class="mono" id="FnetVal">—</span></div>
         <div class="box"><b>a</b><span class="mono" id="aval">—</span></div>
       </div>
 
       <div class="kpi" id="kpiThird" style="display:none;">
-        <div class="box"><b>F<sub>12</sub> (στο 1 από 2)</b><span class="mono" id="F12">—</span></div>
-        <div class="box"><b>F<sub>21</sub> (στο 2 από 1)</b><span class="mono" id="F21">—</span></div>
+        <div class="box"><b>F12</b><span class="mono" id="F12">—</span></div>
+        <div class="box"><b>F21</b><span class="mono" id="F21">—</span></div>
         <div class="box"><b>m1, m2</b><span class="mono" id="m12">—</span></div>
         <div class="box"><b>a1</b><span class="mono" id="a1">—</span></div>
         <div class="box"><b>a2</b><span class="mono" id="a2">—</span></div>
@@ -119,46 +102,48 @@
       </div>
 
       <div class="callout note" style="margin-top:12px;" id="calloutIncline">
-        <b>Βέλη δυνάμεων:</b> εμφανίζονται <span class="mono">F<sub>g,‖</sub></span>, <span class="mono">N</span>, <span class="mono">F<sub>τ</sub></span> και <span class="mono">F<sub>απ</sub></span>.
-        Στις ρυθμίσεις δεξιά μπορείς να τα κρύψεις/δείξεις.
+        <b>Βέλη δυνάμεων:</b> εμφανίζονται F_g,‖, N, τριβή και F_app.
       </div>
       <div class="callout note" style="margin-top:12px; display:none;" id="calloutThird">
-        <b>3ος Νόμος:</b> Τα σώματα ασκούν <u>ίσα και αντίθετα</u> ζεύγη δυνάμεων: <span class="mono">F<sub>12</sub> = -F<sub>21</sub></span>.
-        Οι επιταχύνσεις διαφέρουν γιατί <span class="mono">a = F/m</span>.
+        <b>3ος Νόμος:</b> F12 = -F21 αλλά a1 ≠ a2 όταν m1 ≠ m2.
       </div>
+
+      <details style="margin-top:12px;">
+        <summary>Για προγραμματισμό: τι αλλάζουν οι μαθητές</summary>
+        <div class="note">
+          Βρείτε στον κώδικα το μπλοκ <b>STUDENT ZONE</b> και αλλάξτε μόνο τις προεπιλογές (<code>DEFAULTS</code>).
+        </div>
+      </details>
     </div>
   </section>
 
-  <!-- RIGHT -->
   <section class="card">
     <div class="hd">
       <b id="rightTitle">Ρυθμίσεις (Κεκλιμένο) & Γραφήματα</b>
       <span class="pill">Αλλαγές live</span>
     </div>
     <div class="content">
-      <!-- incline controls -->
       <div id="panelIncline">
-        <div class="row"><label for="angle">Γωνία θ (°)</label><input id="angle" type="range" min="0" max="35" step="1"><div class="mono"><span id="angleVal"></span></div></div>
+        <div class="row"><label for="angle">Γωνία θ (°)</label><div class="pmwrap"><button class="pm" type="button" onclick="stepAdjust('angle',-1)">−</button><input id="angle" type="range" min="0" max="35" step="1"><button class="pm" type="button" onclick="stepAdjust('angle',+1)">+</button></div><div class="mono"><span id="angleVal"></span></div></div>
         <div class="row"><label for="mass">Μάζα m (kg)</label><input id="mass" type="range" min="1" max="60" step="1"><div class="mono"><span id="massVal"></span></div></div>
-        <div class="row"><label for="force">|F| (N)</label><input id="force" type="range" min="0" max="700" step="5"><div class="mono"><span id="forceVal"></span></div></div>
+        <div class="row"><label for="force">|F| (N)</label><div class="pmwrap"><button class="pm" type="button" onclick="stepAdjust('force',-1)">−</button><input id="force" type="range" min="0" max="700" step="5"><button class="pm" type="button" onclick="stepAdjust('force',+1)">+</button></div><div class="mono"><span id="forceVal"></span></div></div>
         <div class="row"><label for="muS">μs (στατική)</label><input id="muS" type="range" min="0" max="1.2" step="0.01"><div class="mono"><span id="muSVal"></span></div></div>
         <div class="row"><label for="muK">μk (κινητική)</label><input id="muK" type="range" min="0" max="1.2" step="0.01"><div class="mono"><span id="muKVal"></span></div></div>
         <div class="row"><label for="pushDuration">Διάρκεια ώθησης (s)</label><input id="pushDuration" type="range" min="0.2" max="3.0" step="0.1"><div class="mono"><span id="pushDurationVal"></span></div></div>
         <div class="row"><label for="showGrid">Πλέγμα;</label><input id="showGrid" type="range" min="0" max="1" step="1"><div class="mono"><span id="showGridVal"></span></div></div>
         <div class="row"><label for="showVectors">Βέλη δυνάμεων;</label><input id="showVectors" type="range" min="0" max="1" step="1"><div class="mono"><span id="showVectorsVal"></span></div></div>
-        <div class="row"><label for="showDetailed">Αναλυτικά βέλη (N, τριβή);</label><input id="showDetailed" type="range" min="0" max="1" step="1"><div class="mono"><span id="showDetailedVal"></span></div></div>
+        <div class="row"><label for="showDetailed">Αναλυτικά βέλη;</label><input id="showDetailed" type="range" min="0" max="1" step="1"><div class="mono"><span id="showDetailedVal"></span></div></div>
         <div class="row"><label for="boxColor">Χρώμα αντικειμένου</label><input id="boxColor" type="range" min="0" max="5" step="1"><div class="mono"><span id="boxColorVal"></span></div></div>
       </div>
 
-      <!-- third-law controls -->
       <div id="panelThird" style="display:none;">
         <div class="row"><label for="m1">Μάζα m1 (kg)</label><input id="m1" type="range" min="1" max="60" step="1"><div class="mono"><span id="m1Val"></span></div></div>
         <div class="row"><label for="m2">Μάζα m2 (kg)</label><input id="m2" type="range" min="1" max="60" step="1"><div class="mono"><span id="m2Val"></span></div></div>
-        <div class="row"><label for="Fint">Δύναμη αλληλεπίδρασης |F| (N)</label><input id="Fint" type="range" min="0" max="700" step="5"><div class="mono"><span id="FintVal"></span></div></div>
-        <div class="row"><label for="dur2">Διάρκεια αλληλεπίδρασης (s)</label><input id="dur2" type="range" min="0.2" max="3.0" step="0.1"><div class="mono"><span id="dur2Val"></span></div></div>
+        <div class="row"><label for="Fint">|F| (N)</label><input id="Fint" type="range" min="0" max="700" step="5"><div class="mono"><span id="FintVal"></span></div></div>
+        <div class="row"><label for="dur2">Διάρκεια (s)</label><input id="dur2" type="range" min="0.2" max="3.0" step="0.1"><div class="mono"><span id="dur2Val"></span></div></div>
         <div class="row"><label for="fric2">Τριβή δαπέδου (μ)</label><input id="fric2" type="range" min="0" max="0.6" step="0.01"><div class="mono"><span id="fric2Val"></span></div></div>
         <div class="row"><label for="showGrid2">Πλέγμα;</label><input id="showGrid2" type="range" min="0" max="1" step="1"><div class="mono"><span id="showGrid2Val"></span></div></div>
-        <div class="row"><label for="showVectors2">Βέλη δυνάμεων;</label><input id="showVectors2" type="range" min="0" max="1" step="1"><div class="mono"><span id="showVectors2Val"></span></div></div>
+        <div class="row"><label for="showVectors2">Βέλη;</label><input id="showVectors2" type="range" min="0" max="1" step="1"><div class="mono"><span id="showVectors2Val"></span></div></div>
       </div>
 
       <div class="grid2" style="margin-top:12px;">
@@ -171,127 +156,125 @@
           <canvas id="plotA" width="420" height="200"></canvas>
         </div>
       </div>
-
-      <details style="margin-top:12px;">
-        <summary>STUDENT PARAMETERS (τι να αλλάξουν στον κώδικα)</summary>
-        <div class="note">
-          Αλλάξτε εύκολα: <span class="mono">g, dt, plotWindow_s, PX_PER_M</span> και όλα τα <span class="mono">m, θ, μs, μk, |F|</span>.
-          Επιπλέον: <span class="mono">showGrid / showVectors / showDetailed</span>, χρώματα <span class="mono">COLOR_PRESETS</span>.
-        </div>
-      </details>
     </div>
   </section>
 </div>
 
 <script>
-/* =========================================================
-   STUDENT PARAMETERS (εύκολη αλλαγή από μαθητές)
-   ========================================================= */
-let g = 9.81;              // m/s^2
-let dt = 1/60;             // s
-let plotWindow_s = 12;     // seconds shown on plots
-let PX_PER_M = 150;        // pixels per meter (visual scale)
+/* =====================================================================
+   STUDENT ZONE ✅  (ΜΟΝΟ αυτό αλλάζουν οι μαθητές στην 1η φάση)
+   ===================================================================== */
+const DEFAULTS = {
+  g: 9.81,
+  plotWindow_s: 12,
+  PX_PER_M: 150,
 
-// --- Mode 1: Incline
-let angle_deg = 12;
-let mass_kg = 12;
-let mu_s = 0.45;
-let mu_k = 0.35;
-let pushMag_N = 160;
-let pushDuration_s = 1.2;
-let pushOn = 0;
-let showGrid = 1;
-let showVectors = 1;
-let showDetailed = 1; // show N + friction arrows too
-let boxColorIndex = 0;
+  // Κεκλιμένο (προεπιλογές)
+  angle_deg: 12,
+  mass_kg: 12,
+  mu_s: 0.45,
+  mu_k: 0.35,
+  pushMag_N: 160,
+  pushDuration_s: 1.2,
+  showGrid: 1,
+  showVectors: 1,
+  showDetailed: 1,
+  boxColorIndex: 0,
 
-// --- Mode 2: Third Law (two bodies)
-let m1_kg = 10;
-let m2_kg = 25;
-let Fint_N = 180;
-let interactDuration_s = 1.0;
-let interactOn = 1;
-let mu_floor = 0.10;  // simple kinetic friction on horizontal
-let showGrid2 = 1;
-let showVectors2 = 1;
+  // 3ος Νόμος (προεπιλογές)
+  m1_kg: 10,
+  m2_kg: 25,
+  Fint_N: 180,
+  interactDuration_s: 1.0,
+  mu_floor: 0.10,
+  showGrid2: 1,
+  showVectors2: 1,
+};
 
 const COLOR_PRESETS = [
   {name:"Κυανό",  box:"#7dd3fc"},
   {name:"Πράσινο",box:"#a7f3d0"},
-  {name:"Κίτρινο",box:"#FFFF00"},
+  {name:"Κίτρινο",box:"#fbbf24"},
   {name:"Ροζ",   box:"#fb7185"},
-  {name:"Πορτοκαλί",   box:"#FF7F50"},
-  {name:"Λευκό", box:"#ffffff"},
+  {name:"Μωβ",   box:"#c4b5fd"},
+  {name:"Λευκό", box:"#eaf2ff"},
 ];
+/* ======================= END STUDENT ZONE =========================== */
+
+
+/* =====================================================================
+   ADVANCED ZONE ⚙️  (μην το αλλάξετε στην 1η φάση)
+   ===================================================================== */
+let g = DEFAULTS.g;
+let dt = 1/60;
+let plotWindow_s = DEFAULTS.plotWindow_s;
+let PX_PER_M = DEFAULTS.PX_PER_M;
+
+let angle_deg = DEFAULTS.angle_deg;
+let mass_kg = DEFAULTS.mass_kg;
+let mu_s = DEFAULTS.mu_s;
+let mu_k = DEFAULTS.mu_k;
+let pushMag_N = DEFAULTS.pushMag_N;
+let pushDuration_s = DEFAULTS.pushDuration_s;
+let pushOn = 1;
+let showGrid = DEFAULTS.showGrid;
+let showVectors = DEFAULTS.showVectors;
+let showDetailed = DEFAULTS.showDetailed;
+let boxColorIndex = DEFAULTS.boxColorIndex;
+
+let m1_kg = DEFAULTS.m1_kg;
+let m2_kg = DEFAULTS.m2_kg;
+let Fint_N = DEFAULTS.Fint_N;
+let interactDuration_s = DEFAULTS.interactDuration_s;
+let interactOn = 1;
+let mu_floor = DEFAULTS.mu_floor;
+let showGrid2 = DEFAULTS.showGrid2;
+let showVectors2 = DEFAULTS.showVectors2;
 
 const COLORS = {
-  text:"rgba(234,242,255,.92)",
-  muted:"rgba(234,242,255,.72)",
-  grid:"rgba(234,242,255,.08)",
-  slope:"rgba(234,242,255,.85)",
-  person:"rgba(234,242,255,.92)",
-  fAppUp:"rgba(125,211,252,.95)",
-  fAppDown:"rgba(251,191,36,.95)",
-  fN:"rgba(167,243,208,.95)",
-  fFric:"rgba(251,113,133,.95)",
-  fG:"rgba(196,181,253,.95)",
+  text:"rgba(234,242,255,.92)", muted:"rgba(234,242,255,.72)", grid:"rgba(234,242,255,.08)",
+  slope:"rgba(234,242,255,.85)", person:"rgba(234,242,255,.92)",
+  fAppUp:"rgba(125,211,252,.95)", fAppDown:"rgba(251,191,36,.95)",
+  fN:"rgba(167,243,208,.95)", fFric:"rgba(251,113,133,.95)", fG:"rgba(196,181,253,.95)",
 };
-/* ========================================================= */
 
-// ---- DOM refs
-const sim = document.getElementById("sim");
-const ctx = sim.getContext("2d");
+const sim = document.getElementById("sim"); const ctx = sim.getContext("2d");
 const plotV = document.getElementById("plotV"); const pv = plotV.getContext("2d");
 const plotA = document.getElementById("plotA"); const pa = plotA.getContext("2d");
-
 const el = id => document.getElementById(id);
+
 const ui = {
-  tabIncline: el("tabIncline"), tabThird: el("tabThird"),
-  statusPill: el("statusPill"), rightTitle: el("rightTitle"),
+  tabIncline: el("tabIncline"), tabThird: el("tabThird"), statusPill: el("statusPill"),
+  rightTitle: el("rightTitle"),
   controlsIncline: el("controlsIncline"), controlsThird: el("controlsThird"),
   kpiIncline: el("kpiIncline"), kpiThird: el("kpiThird"),
   calloutIncline: el("calloutIncline"), calloutThird: el("calloutThird"),
   panelIncline: el("panelIncline"), panelThird: el("panelThird"),
   plotVTitle: el("plotVTitle"), plotATitle: el("plotATitle"),
-
-  // incline sliders
   angle: el("angle"), mass: el("mass"), force: el("force"), muS: el("muS"), muK: el("muK"),
   pushDuration: el("pushDuration"), showGrid: el("showGrid"), showVectors: el("showVectors"),
   showDetailed: el("showDetailed"), boxColor: el("boxColor"),
   angleVal: el("angleVal"), massVal: el("massVal"), forceVal: el("forceVal"),
   muSVal: el("muSVal"), muKVal: el("muKVal"), pushDurationVal: el("pushDurationVal"),
-  showGridVal: el("showGridVal"), showVectorsVal: el("showVectorsVal"), showDetailedVal: el("showDetailedVal"),
-  boxColorVal: el("boxColorVal"),
-
-  // incline buttons
+  showGridVal: el("showGridVal"), showVectorsVal: el("showVectorsVal"),
+  showDetailedVal: el("showDetailedVal"), boxColorVal: el("boxColorVal"),
   pushUpBtn: el("pushUpBtn"), pushDownBtn: el("pushDownBtn"),
   togglePushBtn: el("togglePushBtn"), pauseBtn: el("pauseBtn"), resetBtn: el("resetBtn"), clearPlotsBtn: el("clearPlotsBtn"),
-
-  // incline KPI
   Nval: el("Nval"), Fgval: el("Fgval"), FsmaxVal: el("FsmaxVal"), FkVal: el("FkVal"), FnetVal: el("FnetVal"), aval: el("aval"),
-
-  // third sliders
   m1: el("m1"), m2: el("m2"), Fint: el("Fint"), dur2: el("dur2"), fric2: el("fric2"), showGrid2: el("showGrid2"), showVectors2: el("showVectors2"),
   m1Val: el("m1Val"), m2Val: el("m2Val"), FintVal: el("FintVal"), dur2Val: el("dur2Val"), fric2Val: el("fric2Val"), showGrid2Val: el("showGrid2Val"), showVectors2Val: el("showVectors2Val"),
-
-  // third buttons
   pushApartBtn: el("pushApartBtn"), toggleInteractBtn: el("toggleInteractBtn"), pauseBtn2: el("pauseBtn2"), resetBtn2: el("resetBtn2"), clearPlotsBtn2: el("clearPlotsBtn2"),
-
-  // third KPI
   F12: el("F12"), F21: el("F21"), m12: el("m12"), a1: el("a1"), a2: el("a2"), thirdNote: el("thirdNote"),
 };
 
-// ---- helpers
 function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
 function rad(d){ return d*Math.PI/180; }
 
-// ---- plots
-let samplesV = []; // {t, v}
-let samplesA = []; // {t, a}
+let samplesV = [];
+let samplesA = [];
 function clearPlots(){ samplesV=[]; samplesA=[]; }
 
-// ---- mode switching
-let mode = "incline"; // "incline" | "third"
+let mode = "incline";
 function setMode(m){
   mode = m;
   ui.tabIncline.classList.toggle("active", mode==="incline");
@@ -312,17 +295,9 @@ function setMode(m){
 ui.tabIncline.addEventListener("click", ()=> setMode("incline"));
 ui.tabThird.addEventListener("click", ()=> setMode("third"));
 
-// =========================================================
-// MODE 1: Incline simulation
-// =========================================================
+// Incline sim
 const slope = { leftX: 120, leftY: 330, lengthPx: 660 };
-
-const inc = {
-  t: 0, s: 2.5, v: 0, a: 0,
-  Fapp: 0,
-  pushingUntil: 0,
-  lastDir: +1,
-};
+const inc = { t:0, s:2.5, v:0, a:0, Fapp:0, pushingUntil:0, lastDir:+1 };
 
 function syncInclineUIFromParams(){
   ui.angle.value = clamp(angle_deg, +ui.angle.min, +ui.angle.max);
@@ -363,23 +338,27 @@ function renderInclineUIValues(){
   ui.boxColorVal.textContent = COLOR_PRESETS[boxColorIndex]?.name ?? boxColorIndex;
 }
 ["angle","mass","force","muS","muK","pushDuration","showGrid","showVectors","showDetailed","boxColor"].forEach(id=>{
-  ui[id].addEventListener("input", ()=> { syncInclineParamsFromUI(); });
+  ui[id].addEventListener("input", syncInclineParamsFromUI);
 });
 syncInclineUIFromParams();
 
-ui.pushUpBtn.addEventListener("click", ()=> triggerInclinePush(+1));
-ui.pushDownBtn.addEventListener("click", ()=> triggerInclinePush(-1));
+ui.pushUpBtn.addEventListener("click", ()=> setContinuousDir(+1));
+ui.pushDownBtn.addEventListener("click", ()=> setContinuousDir(-1));
 ui.togglePushBtn.addEventListener("click", ()=>{
   pushOn = pushOn ? 0 : 1;
   ui.togglePushBtn.textContent = "Ώθηση: " + (pushOn ? "ON" : "OFF");
   ui.togglePushBtn.className = pushOn ? "mint" : "rose";
 });
 
-function triggerInclinePush(dir){
-  if(!pushOn) return;
-  inc.Fapp = dir * pushMag_N; // along slope (+ up)
-  inc.pushingUntil = inc.t + pushDuration_s;
-  inc.lastDir = dir;
+
+// Συνεχής δύναμη: πατάς ΔΕΞΙΑ/ΑΡΙΣΤΕΡΑ για ON/OFF κατεύθυνσης
+let continuousDir = 0; // +1 ΔΕΞΙΑ (πάνω στην κλίση), -1 ΑΡΙΣΤΕΡΑ (κάτω), 0=OFF
+function setContinuousDir(dir){
+  if(!pushOn){ continuousDir = 0; return; }
+  continuousDir = (continuousDir===dir) ? 0 : dir;
+  ui.pushUpBtn.classList.toggle("cyan", continuousDir===+1);
+  ui.pushDownBtn.classList.toggle("amber", continuousDir===-1);
+  inc.lastDir = (continuousDir!==0) ? continuousDir : inc.lastDir;
 }
 
 function pointOnSlope(s_m){
@@ -387,16 +366,19 @@ function pointOnSlope(s_m){
   const dx = s_m * PX_PER_M;
   return { x: slope.leftX + dx*Math.cos(th), y: slope.leftY - dx*Math.sin(th), th };
 }
-
 function computeInclineForces(){
   const th = rad(angle_deg);
   const N = mass_kg * g * Math.cos(th);
-  const Fg_par = -mass_kg * g * Math.sin(th); // negative (down-slope)
+  const Fg_par = -mass_kg * g * Math.sin(th);
   const Fs_max = mu_s * N;
   const Fk = mu_k * N;
-
-  if (inc.t >= inc.pushingUntil) inc.Fapp = 0;
-  const Fapp = inc.Fapp;
+  if (inc.t >= inc.pushingUntil) inc.Fapp = 0; // legacy timeout (κρατιέται για συμβατότητα)
+  // Συνεχής εφαρμογή δύναμης (αν έχει επιλεγεί κατεύθυνση και Ώθηση ON)
+  let Fapp = 0;
+  if(pushOn && (typeof continuousDir!=="undefined") && continuousDir!==0){
+    Fapp = continuousDir * pushMag_N;
+    inc.lastDir = continuousDir;
+  }
 
   const eps = 1e-3;
   let friction = 0;
@@ -405,9 +387,7 @@ function computeInclineForces(){
   if (Math.abs(inc.v) < eps){
     const FnoFric = Fapp + Fg_par;
     if (Math.abs(FnoFric) <= Fs_max){
-      friction = -FnoFric;
-      a = 0;
-      inc.v = 0;
+      friction = -FnoFric; a = 0; inc.v = 0;
     } else {
       const motionDir = Math.sign(FnoFric);
       friction = -motionDir * Fk;
@@ -418,20 +398,16 @@ function computeInclineForces(){
     friction = -Math.sign(inc.v) * Fk;
     const Fnet = Fapp + Fg_par + friction;
     a = Fnet / mass_kg;
-    if (Math.sign(inc.v) !== Math.sign(inc.v + a*dt) && Math.abs(inc.v) < 0.03) inc.v = 0;
   }
-
   const Fnet = Fapp + Fg_par + friction;
   return {th, N, Fg_par, Fs_max, Fk, friction, Fnet, a, Fapp};
 }
-
 function stepIncline(){
   inc.t += dt;
   const {N, Fg_par, Fs_max, Fk, friction, Fnet, a} = computeInclineForces();
   inc.a = a;
   inc.v += inc.a * dt;
   inc.s += inc.v * dt;
-
   const slopeLen_m = slope.lengthPx / PX_PER_M;
   inc.s = clamp(inc.s, 0.25, slopeLen_m - 0.25);
 
@@ -443,18 +419,14 @@ function stepIncline(){
   ui.aval.textContent = inc.a.toFixed(3) + " m/s²";
 
   const moving = Math.abs(inc.v) > 1e-3;
-  const applying = Math.abs((inc.t < inc.pushingUntil) ? inc.Fapp : 0) > 0;
-  const status = moving ? "Κινείται" : (applying ? "Πιέζει (στατική)" : "Ακίνητο");
-  ui.statusPill.textContent = status;
-  ui.statusPill.style.borderColor = moving ? "rgba(167,243,208,.6)" : (applying ? "rgba(251,191,36,.6)" : "rgba(234,242,255,.18)");
-  ui.statusPill.style.background = moving ? "rgba(167,243,208,.12)" : (applying ? "rgba(251,191,36,.10)" : "rgba(0,0,0,.16)");
+  const applying = (pushOn && (typeof continuousDir!=="undefined") && continuousDir!==0);
+  ui.statusPill.textContent = moving ? "Κινείται" : (applying ? "Πιέζει (στατική)" : "Ακίνητο");
 
   samplesV.push({t: inc.t, v: inc.v});
   samplesA.push({t: inc.t, a: inc.a});
   const tMin = inc.t - plotWindow_s;
   while(samplesV.length && samplesV[0].t < tMin) samplesV.shift();
   while(samplesA.length && samplesA[0].t < tMin) samplesA.shift();
-
   return {friction};
 }
 
@@ -468,8 +440,7 @@ function drawArrow(x1,y1,x2,y2,color,label){
   ctx.moveTo(x2,y2);
   ctx.lineTo(x2 - head*Math.cos(ang-0.55), y2 - head*Math.sin(ang-0.55));
   ctx.lineTo(x2 - head*Math.cos(ang+0.55), y2 - head*Math.sin(ang+0.55));
-  ctx.closePath();
-  ctx.fill();
+  ctx.closePath(); ctx.fill();
   if(label){
     ctx.fillStyle = COLORS.text;
     ctx.font = "14px ui-monospace, Menlo, Consolas, monospace";
@@ -477,12 +448,10 @@ function drawArrow(x1,y1,x2,y2,color,label){
   }
   ctx.restore();
 }
-
 function drawPerson(px, py, facingRight=true){
   const dir = facingRight ? 1 : -1;
   ctx.save();
-  ctx.strokeStyle = COLORS.person;
-  ctx.lineWidth = 2.5;
+  ctx.strokeStyle = COLORS.person; ctx.lineWidth = 2.5;
   ctx.beginPath(); ctx.arc(px, py-46, 15, 0, Math.PI*2); ctx.stroke();
   ctx.beginPath(); ctx.moveTo(px, py-30); ctx.lineTo(px, py+18); ctx.stroke();
   ctx.beginPath();
@@ -494,7 +463,6 @@ function drawPerson(px, py, facingRight=true){
   ctx.stroke();
   ctx.restore();
 }
-
 function drawGrid(on){
   if(!on) return;
   ctx.save(); ctx.strokeStyle = COLORS.grid; ctx.lineWidth = 1;
@@ -502,24 +470,16 @@ function drawGrid(on){
   for(let y=0;y<=sim.height;y+=40){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(sim.width,y); ctx.stroke(); }
   ctx.restore();
 }
-
 function drawInclineScene(extra){
   ctx.clearRect(0,0,sim.width,sim.height);
   drawGrid(showGrid);
-
   const th = rad(angle_deg);
-  // slope
-  ctx.save();
-  ctx.strokeStyle = COLORS.slope; ctx.lineWidth = 3;
+  ctx.save(); ctx.strokeStyle = COLORS.slope; ctx.lineWidth = 3;
   const rightX = slope.leftX + slope.lengthPx*Math.cos(th);
   const rightY = slope.leftY - slope.lengthPx*Math.sin(th);
   ctx.beginPath(); ctx.moveTo(slope.leftX, slope.leftY); ctx.lineTo(rightX, rightY); ctx.stroke();
-  // baseline
-  ctx.strokeStyle = "rgba(234,242,255,.12)"; ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.moveTo(0, slope.leftY+45); ctx.lineTo(sim.width, slope.leftY+45); ctx.stroke();
   ctx.restore();
 
-  // object
   const p = pointOnSlope(inc.s);
   const boxW=110, boxH=70;
   const boxColor = COLOR_PRESETS[boxColorIndex]?.box ?? "#7dd3fc";
@@ -534,52 +494,29 @@ function drawInclineScene(extra){
   ctx.strokeRect(-boxW/2, -boxH-6, boxW, boxH);
   ctx.restore();
 
-  // person (side depends on lastDir)
   const dir = inc.lastDir;
   const offset = (dir>0) ? -0.9 : +0.9;
   const pp = pointOnSlope(clamp(inc.s + offset, 0.25, (slope.lengthPx/PX_PER_M)-0.25));
   const perpX = Math.sin(th), perpY = Math.cos(th);
   drawPerson(pp.x + perpX*28, pp.y + perpY*28, dir>0);
 
-  // labels
-  ctx.save();
-  ctx.fillStyle = COLORS.text;
-  ctx.font = "16px ui-monospace, Menlo, Consolas, monospace";
-  ctx.fillText(`θ=${angle_deg.toFixed(0)}°  m=${mass_kg.toFixed(0)}kg  μs=${mu_s.toFixed(2)}  μk=${mu_k.toFixed(2)}  |F|=${pushMag_N.toFixed(0)}N`, 14, 24);
-  ctx.fillStyle = COLORS.muted;
-  ctx.font = "14px system-ui, Segoe UI, Arial";
-  ctx.fillText(`v=${inc.v.toFixed(3)} m/s   a=${inc.a.toFixed(3)} m/s²`, 14, 48);
-  ctx.restore();
-
   if(!showVectors) return;
-
-  // forces drawn at a point on box (use p.x,p.y shifted a bit)
   const cx = p.x, cy = p.y - 18;
-
-  // Applied force along slope
   const Fapp = (inc.t < inc.pushingUntil) ? inc.Fapp : 0;
-  const arrowScale = 0.45; // px per N (visual)
+  const arrowScale = 0.45;
   if(Math.abs(Fapp) > 0){
     const L = Fapp * arrowScale;
     drawArrow(cx, cy, cx + L*Math.cos(th), cy - L*Math.sin(th),
       (Fapp>0)?COLORS.fAppUp:COLORS.fAppDown, `Fapp=${Fapp.toFixed(0)}N`);
   }
-
   if(!showDetailed) return;
-
-  // Gravity component along slope (down-slope)
   const Fg_par = -mass_kg*g*Math.sin(th);
-  const Lg = Fg_par * arrowScale; // negative
+  const Lg = Fg_par * arrowScale;
   drawArrow(cx, cy+30, cx + Lg*Math.cos(th), cy+30 - Lg*Math.sin(th), COLORS.fG, `Fg‖=${Fg_par.toFixed(0)}N`);
-
-  // Normal force (perpendicular out of slope)
-  // screen perpendicular unit vector (sinθ, cosθ) pointing "up" from slope
   const ux = Math.sin(th), uy = Math.cos(th);
   const N = mass_kg*g*Math.cos(th);
-  const LN = N * 0.12; // smaller scale for vertical-ish arrows
+  const LN = N * 0.12;
   drawArrow(cx-20, cy+10, cx-20 + LN*ux, cy+10 + LN*uy, COLORS.fN, `N=${N.toFixed(0)}N`);
-
-  // Friction along slope opposite motion tendency/velocity
   const friction = extra?.friction ?? 0;
   if(Math.abs(friction) > 0.5){
     const Lf = friction * arrowScale;
@@ -587,17 +524,8 @@ function drawInclineScene(extra){
   }
 }
 
-// =========================================================
-// MODE 2: Third-law (two bodies on horizontal)
-// =========================================================
-const third = {
-  t: 0,
-  x1: 280, v1: 0, a1: 0,
-  x2: 560, v2: 0, a2: 0,
-  F12: 0, // force on 1 from 2 (N) (positive right)
-  F21: 0, // force on 2 from 1 (N)
-  until: 0,
-};
+// Third-law
+const third = { t:0, x1:280, v1:0, a1:0, x2:560, v2:0, a2:0, F12:0, F21:0, until:0 };
 
 function syncThirdUIFromParams(){
   ui.m1.value = clamp(m1_kg, +ui.m1.min, +ui.m1.max);
@@ -628,9 +556,7 @@ function renderThirdUIValues(){
   ui.showGrid2Val.textContent = showGrid2 ? "ΝΑΙ" : "ΟΧΙ";
   ui.showVectors2Val.textContent = showVectors2 ? "ΝΑΙ" : "ΟΧΙ";
 }
-["m1","m2","Fint","dur2","fric2","showGrid2","showVectors2"].forEach(id=>{
-  ui[id].addEventListener("input", syncThirdParamsFromUI);
-});
+["m1","m2","Fint","dur2","fric2","showGrid2","showVectors2"].forEach(id=> ui[id].addEventListener("input", syncThirdParamsFromUI));
 syncThirdUIFromParams();
 
 ui.toggleInteractBtn.addEventListener("click", ()=>{
@@ -640,8 +566,6 @@ ui.toggleInteractBtn.addEventListener("click", ()=>{
 });
 ui.pushApartBtn.addEventListener("click", ()=>{
   if(!interactOn) return;
-  // Apply equal and opposite forces for duration:
-  // Force on 1 from 2 is to the LEFT, on 2 from 1 is to the RIGHT (bodies push apart)
   third.F12 = -Fint_N;
   third.F21 = +Fint_N;
   third.until = third.t + interactDuration_s;
@@ -649,35 +573,22 @@ ui.pushApartBtn.addEventListener("click", ()=>{
 
 function stepThird(){
   third.t += dt;
-  // turn off interaction after time
-  if(third.t >= third.until){
-    third.F12 = 0;
-    third.F21 = 0;
-  }
-
-  // friction model: kinetic friction opposite velocity, magnitude mu*m*g
+  if(third.t >= third.until){ third.F12=0; third.F21=0; }
   function fricForce(v, m){
     if(Math.abs(v) < 1e-3) return 0;
     return -Math.sign(v) * (mu_floor*m*g);
   }
-
   const f1 = third.F12 + fricForce(third.v1, m1_kg);
   const f2 = third.F21 + fricForce(third.v2, m2_kg);
-
   third.a1 = f1 / m1_kg;
   third.a2 = f2 / m2_kg;
-
   third.v1 += third.a1 * dt;
   third.v2 += third.a2 * dt;
-
-  third.x1 += third.v1 * dt * 90; // pixels scale for horizontal
+  third.x1 += third.v1 * dt * 90;
   third.x2 += third.v2 * dt * 90;
-
-  // bounds
   third.x1 = clamp(third.x1, 90, sim.width-90);
   third.x2 = clamp(third.x2, 90, sim.width-90);
 
-  // KPIs
   ui.F12.textContent = third.F12.toFixed(0) + " N";
   ui.F21.textContent = third.F21.toFixed(0) + " N";
   ui.m12.textContent = `m1=${m1_kg.toFixed(0)}kg  m2=${m2_kg.toFixed(0)}kg`;
@@ -685,15 +596,10 @@ function stepThird(){
   ui.a2.textContent = third.a2.toFixed(3) + " m/s²";
   ui.thirdNote.textContent = (Math.abs(third.F12 + third.F21) < 1e-6) ? "F12 = -F21 ✔" : "Ελέγξτε τις δυνάμεις";
 
-  // status pill
   const moving = (Math.abs(third.v1) + Math.abs(third.v2)) > 1e-3;
   const interacting = Math.abs(third.F12) > 0;
-  const status = interacting ? "Αλληλεπιδρά" : (moving ? "Κινείται" : "Ακίνητο");
-  ui.statusPill.textContent = status;
-  ui.statusPill.style.borderColor = interacting ? "rgba(251,191,36,.6)" : (moving ? "rgba(167,243,208,.6)" : "rgba(234,242,255,.18)");
-  ui.statusPill.style.background = interacting ? "rgba(251,191,36,.10)" : (moving ? "rgba(167,243,208,.12)" : "rgba(0,0,0,.16)");
+  ui.statusPill.textContent = interacting ? "Αλληλεπιδρά" : (moving ? "Κινείται" : "Ακίνητο");
 
-  // plots: use body1 only to keep UI simple
   samplesV.push({t: third.t, v: third.v1});
   samplesA.push({t: third.t, a: third.a1});
   const tMin = third.t - plotWindow_s;
@@ -704,18 +610,11 @@ function stepThird(){
 function drawThirdScene(){
   ctx.clearRect(0,0,sim.width,sim.height);
   drawGrid(showGrid2);
-
-  // floor line
-  ctx.save();
-  ctx.strokeStyle = "rgba(234,242,255,.25)";
-  ctx.lineWidth = 3;
+  ctx.save(); ctx.strokeStyle = "rgba(234,242,255,.25)"; ctx.lineWidth = 3;
   ctx.beginPath(); ctx.moveTo(0, 320); ctx.lineTo(sim.width, 320); ctx.stroke();
   ctx.restore();
 
-  // bodies
-  const y = 300;
-  const w = 90, h = 60;
-
+  const y = 300; const w = 90, h = 60;
   function drawBox(x, label, color){
     ctx.save();
     ctx.fillStyle = color + "22";
@@ -728,77 +627,34 @@ function drawThirdScene(){
     ctx.fillText(label, x-w/2+8, y-h-10);
     ctx.restore();
   }
+  drawBox(third.x1, `Σώμα 1 (m1=${m1_kg.toFixed(0)}kg)`, "#7dd3fc");
+  drawBox(third.x2, `Σώμα 2 (m2=${m2_kg.toFixed(0)}kg)`, "#a7f3d0");
 
-  const c1 = "#7dd3fc";
-  const c2 = "#a7f3d0";
-  drawBox(third.x1, `Σώμα 1 (m1=${m1_kg.toFixed(0)}kg)`, c1);
-  drawBox(third.x2, `Σώμα 2 (m2=${m2_kg.toFixed(0)}kg)`, c2);
-
-  // draw interaction arrows on each body (equal and opposite)
   if(showVectors2 && (Math.abs(third.F12) > 0 || Math.abs(third.F21) > 0)){
     const scale = 0.35;
-    const L1 = third.F12 * scale;
-    const L2 = third.F21 * scale;
-
-    // Force on body1 from body2 (F12)
-    drawArrow(third.x1, y-h/2, third.x1 + L1, y-h/2, COLORS.fAppDown, `F12=${third.F12.toFixed(0)}N`);
-    // Force on body2 from body1 (F21)
-    drawArrow(third.x2, y-h/2, third.x2 + L2, y-h/2, COLORS.fAppUp, `F21=${third.F21.toFixed(0)}N`);
+    drawArrow(third.x1, y-h/2, third.x1 + third.F12*scale, y-h/2, COLORS.fAppDown, `F12=${third.F12.toFixed(0)}N`);
+    drawArrow(third.x2, y-h/2, third.x2 + third.F21*scale, y-h/2, COLORS.fAppUp, `F21=${third.F21.toFixed(0)}N`);
   }
-
-  // label
-  ctx.save();
-  ctx.fillStyle = COLORS.text;
-  ctx.font = "16px ui-monospace, Menlo, Consolas, monospace";
-  ctx.fillText(`F12 = -F21 (δράση–αντίδραση)   μ=${mu_floor.toFixed(2)}`, 14, 24);
-  ctx.fillStyle = COLORS.muted;
-  ctx.font = "14px system-ui, Segoe UI, Arial";
-  ctx.fillText(`v1=${third.v1.toFixed(3)}  a1=${third.a1.toFixed(3)}   |   v2=${third.v2.toFixed(3)}  a2=${third.a2.toFixed(3)}`, 14, 48);
-  ctx.restore();
 }
 
-// =========================================================
-// plots
-// =========================================================
 function drawPlot(pctx, canvas, samples, key, title){
   const w = canvas.width, h = canvas.height;
   pctx.clearRect(0,0,w,h);
   pctx.fillStyle = "rgba(0,0,0,.22)"; pctx.fillRect(0,0,w,h);
-
   pctx.strokeStyle = "rgba(234,242,255,.18)"; pctx.lineWidth = 1;
   pctx.beginPath(); pctx.moveTo(34, 10); pctx.lineTo(34, h-24); pctx.lineTo(w-10, h-24); pctx.stroke();
-
-  pctx.fillStyle = "rgba(234,242,255,.8)";
-  pctx.font = "12px system-ui, Segoe UI, Arial";
+  pctx.fillStyle = "rgba(234,242,255,.8)"; pctx.font = "12px system-ui, Segoe UI, Arial";
   pctx.fillText(title, 38, 14);
-
   if(samples.length < 2) return;
-
-  const t0 = samples[0].t;
-  const t1 = samples[samples.length-1].t;
+  const t0 = samples[0].t, t1 = samples[samples.length-1].t;
   const tSpan = Math.max(0.001, (t1 - t0));
-
   let minY = Infinity, maxY = -Infinity;
-  for(const s of samples){ const y = s[key]; if(y<minY) minY=y; if(y>maxY) maxY=y; }
+  for(const s of samples){ const yv = s[key]; if(yv<minY) minY=yv; if(yv>maxY) maxY=yv; }
   const pad = (maxY-minY)*0.15 + 0.02;
   minY -= pad; maxY += pad;
   if(Math.abs(maxY-minY) < 1e-6){ maxY += 1; minY -= 1; }
 
-  // y ticks
-  pctx.fillStyle = "rgba(234,242,255,.55)";
-  pctx.font = "11px ui-monospace, Menlo, Consolas, monospace";
-  const ticks = 3;
-  for(let i=0;i<=ticks;i++){
-    const yy = 10 + (h-34) * (i/ticks);
-    const val = (maxY - (maxY-minY)*(i/ticks));
-    pctx.fillText(val.toFixed(2), 2, yy+4);
-    pctx.strokeStyle = "rgba(234,242,255,.08)";
-    pctx.beginPath(); pctx.moveTo(34, yy); pctx.lineTo(w-10, yy); pctx.stroke();
-  }
-
-  // plot line
-  pctx.strokeStyle = "rgba(125,211,252,.95)";
-  pctx.lineWidth = 2;
+  pctx.strokeStyle = "rgba(125,211,252,.95)"; pctx.lineWidth = 2;
   pctx.beginPath();
   for(let i=0;i<samples.length;i++){
     const s = samples[i];
@@ -807,41 +663,16 @@ function drawPlot(pctx, canvas, samples, key, title){
     if(i===0) pctx.moveTo(x,y); else pctx.lineTo(x,y);
   }
   pctx.stroke();
-
-  // marker
-  const last = samples[samples.length-1];
-  const lx = 34 + (w-44) * ((last.t - t0) / tSpan);
-  const ly = 10 + (h-34) * (1 - (last[key]-minY)/(maxY-minY));
-  pctx.fillStyle = "rgba(167,243,208,.95)";
-  pctx.beginPath(); pctx.arc(lx, ly, 3.5, 0, Math.PI*2); pctx.fill();
-
-  // x label
-  pctx.fillStyle = "rgba(234,242,255,.55)";
-  pctx.fillText(`${tSpan.toFixed(1)}s`, w-52, h-6);
 }
 
-// =========================================================
-// controls: pause/reset/clear in both modes
-// =========================================================
 let paused = false;
 ui.pauseBtn.addEventListener("click", ()=>{ paused=!paused; ui.pauseBtn.textContent = paused ? "Συνέχεια" : "Παύση"; });
 ui.pauseBtn2.addEventListener("click", ()=>{ paused=!paused; ui.pauseBtn2.textContent = paused ? "Συνέχεια" : "Παύση"; });
-
-ui.resetBtn.addEventListener("click", ()=>{
-  inc.t=0; inc.s=2.5; inc.v=0; inc.a=0; inc.Fapp=0; inc.pushingUntil=0; inc.lastDir=+1;
-  clearPlots();
-});
-ui.resetBtn2.addEventListener("click", ()=>{
-  third.t=0; third.x1=280; third.v1=0; third.a1=0; third.x2=560; third.v2=0; third.a2=0; third.F12=0; third.F21=0; third.until=0;
-  clearPlots();
-});
-
+ui.resetBtn.addEventListener("click", ()=>{ inc.t=0; inc.s=2.5; inc.v=0; inc.a=0; inc.Fapp=0; inc.pushingUntil=0; inc.lastDir=+1; clearPlots(); });
+ui.resetBtn2.addEventListener("click", ()=>{ third.t=0; third.x1=280; third.v1=0; third.a1=0; third.x2=560; third.v2=0; third.a2=0; third.F12=0; third.F21=0; third.until=0; clearPlots(); });
 ui.clearPlotsBtn.addEventListener("click", clearPlots);
 ui.clearPlotsBtn2.addEventListener("click", clearPlots);
 
-// =========================================================
-// MAIN LOOP
-// =========================================================
 function frame(){
   if(!paused){
     if(mode==="incline"){
@@ -856,21 +687,28 @@ function frame(){
       drawPlot(pa, plotA, samplesA, "a", "a1(t)  [m/s²]");
     }
   } else {
-    // still draw current frame & plots
-    if(mode==="incline"){
-      drawInclineScene({friction: 0});
-      drawPlot(pv, plotV, samplesV, "v", "v(t)  [m/s]");
-      drawPlot(pa, plotA, samplesA, "a", "a(t)  [m/s²]");
-    } else {
-      drawThirdScene();
-      drawPlot(pv, plotV, samplesV, "v", "v1(t)  [m/s]");
-      drawPlot(pa, plotA, samplesA, "a", "a1(t)  [m/s²]");
-    }
+    if(mode==="incline"){ drawInclineScene({friction:0}); } else { drawThirdScene(); }
+    drawPlot(pv, plotV, samplesV, "v", mode==="incline" ? "v(t)  [m/s]" : "v1(t)  [m/s]");
+    drawPlot(pa, plotA, samplesA, "a", mode==="incline" ? "a(t)  [m/s²]" : "a1(t)  [m/s²]");
   }
   requestAnimationFrame(frame);
 }
 setMode("incline");
 frame();
+</script>
+
+<script>
+function stepAdjust(id, delta){
+  const el = document.getElementById(id);
+  if(!el) return;
+  const step = parseFloat(el.step || 1);
+  const min = (el.min!=="" ? parseFloat(el.min) : -1e9);
+  const max = (el.max!=="" ? parseFloat(el.max) : 1e9);
+  let v = parseFloat(el.value) + delta*step;
+  v = Math.min(max, Math.max(min, v));
+  el.value = v;
+  el.dispatchEvent(new Event('input', {bubbles:true}));
+}
 </script>
 </body>
 </html>
