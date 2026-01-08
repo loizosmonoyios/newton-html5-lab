@@ -11,7 +11,7 @@
     header{max-width:1220px;margin:0 auto;padding:18px 16px 10px}
     h1{font-size:1.25rem;margin:0 0 6px}
     header p{margin:0;color:var(--muted);line-height:1.35}
-    .wrap{max-width:1220px;margin:0 auto;padding:12px 16px 24px;display:grid;gap:12px;grid-template-columns:1.2fr .8fr;align-items:start}
+    .wrap{max-width:1220px;margin:0 auto;padding:12px 16px 24px;display:grid;gap:12px;grid-template-columns: 1.0fr 1.0fr;align-items:start}
     @media (max-width:980px){.wrap{grid-template-columns:1fr}}
     .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
     .hd{padding:12px 14px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.02);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
@@ -45,7 +45,64 @@
     .pm:hover{background:rgba(255,255,255,.08)}
     .pmwrap{display:flex;align-items:center;gap:8px}
     .pmwrap input[type="range"]{flex:1}
-  </style>
+  
+/* === FIX: Force slider behaves like Mass (native fill + draggable thumb) === */
+.pmwrap{ display:flex; align-items:center; gap:10px; }
+.pmwrap .pm{ width:30px; height:30px; border-radius:999px; }
+.pmwrap input[type="range"]{ flex:1; min-width: 180px; }
+/* Native blue-fill/white-rest (browser default) */
+input[type="range"]{ accent-color: #2aa8ff; }
+/* Remove any forced hand cursor if present */
+.pmwrap input[type="range"]{ cursor: default; }
+
+
+/* === Layout fix: keep force row inside panel and show + and value === */
+#panelIncline .row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:nowrap;       /* keep value on the right */
+}
+#panelIncline .row label{
+  min-width:120px;        /* a bit smaller so everything fits */
+  white-space:nowrap;
+}
+#panelIncline .row .mono{
+  min-width:120px;        /* value column (wider for long labels) */
+  text-align:right;
+  white-space:nowrap;
+}
+#panelIncline .row .pmwrap{
+  flex:1 1 auto;          /* let slider take remaining space */
+  max-width:none;
+  min-width:0;
+}
+
+#panelIncline .row input[type="range"]{ min-width:0; }
+
+#panelIncline .row .pmwrap input[type="range"]{
+  min-width:0; /* allow shrink so it doesn't push + or value outside */
+  width:100%;
+}
+@media (max-width: 900px){
+  #panelIncline .row{flex-wrap:wrap;}   /* on small screens allow wrap */
+  #panelIncline .row label{min-width:120px;}
+  #panelIncline .row .pmwrap{max-width:100%; min-width:180px;}
+}
+
+
+/* === FIX4: Μην κόβονται οι μεγάλες ετικέτες (wrap μέσα στο ίδιο row) === */
+#panelIncline .row label{
+  white-space: normal !important;   /* allow wrapping */
+  line-height: 1.15;
+  flex: 0 0 150px;                  /* label column width */
+  max-width: 150px;
+}
+@media (max-width: 1100px){
+  #panelIncline .row label{ flex-basis: 140px; max-width: 140px; }
+}
+
+</style>
 </head>
 <body>
 <header>
@@ -126,7 +183,7 @@
       <div id="panelIncline">
         <div class="row"><label for="angle">Γωνία θ (°)</label><div class="pmwrap"><button class="pm" type="button" onclick="stepAdjust('angle',-1)">−</button><input id="angle" type="range" min="0" max="35" step="1"><button class="pm" type="button" onclick="stepAdjust('angle',+1)">+</button></div><div class="mono"><span id="angleVal"></span></div></div>
         <div class="row"><label for="mass">Μάζα m (kg)</label><input id="mass" type="range" min="1" max="60" step="1"><div class="mono"><span id="massVal"></span></div></div>
-        <div class="row"><label for="force">|F| (N)</label><div class="pmwrap"><button class="pm" type="button" onclick="stepAdjust('force',-1)">−</button><input id="force" type="range" min="0" max="700" step="5"><button class="pm" type="button" onclick="stepAdjust('force',+1)">+</button></div><div class="mono"><span id="forceVal"></span></div></div>
+        <div class="row"><label for="force">|F| (N)</label><div class="pmwrap"><button class="pm" type="button" onclick="stepAdjust('force',-1)">−</button><input id="force" type="range" min="0" max="700" step="0.05"><button class="pm" type="button" onclick="stepAdjust('force',+1)">+</button></div><div class="mono"><span id="forceVal"></span></div></div>
         <div class="row"><label for="muS">μs (στατική)</label><input id="muS" type="range" min="0" max="1.2" step="0.01"><div class="mono"><span id="muSVal"></span></div></div>
         <div class="row"><label for="muK">μk (κινητική)</label><input id="muK" type="range" min="0" max="1.2" step="0.01"><div class="mono"><span id="muKVal"></span></div></div>
         <div class="row"><label for="pushDuration">Διάρκεια ώθησης (s)</label><input id="pushDuration" type="range" min="0.2" max="3.0" step="0.1"><div class="mono"><span id="pushDurationVal"></span></div></div>
@@ -328,7 +385,7 @@ function syncInclineParamsFromUI(){
 function renderInclineUIValues(){
   ui.angleVal.textContent = angle_deg.toFixed(0) + "°";
   ui.massVal.textContent = mass_kg.toFixed(0) + " kg";
-  ui.forceVal.textContent = pushMag_N.toFixed(0) + " N";
+  ui.forceVal.textContent = pushMag_N.toFixed(2) + " N";
   ui.muSVal.textContent = mu_s.toFixed(2);
   ui.muKVal.textContent = mu_k.toFixed(2);
   ui.pushDurationVal.textContent = pushDuration_s.toFixed(1) + " s";
@@ -709,6 +766,74 @@ function stepAdjust(id, delta){
   el.value = v;
   el.dispatchEvent(new Event('input', {bubbles:true}));
 }
+
+// === FIX: Mouse wheel on force slider for faster changes (Shift=fast, Alt=fine) ===
+(function(){
+  const force = document.getElementById('force');
+  if(!force) return;
+
+  function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+
+  force.addEventListener('wheel', (e)=>{
+    e.preventDefault();
+    const step = parseFloat(force.step || "1") || 1;
+    const base = (e.shiftKey ? 10 : 3) * step * (e.altKey ? 0.2 : 1);
+    const dir = (e.deltaY < 0) ? +1 : -1;
+    const min = parseFloat(force.min), max = parseFloat(force.max);
+    const next = clamp(parseFloat(force.value) + dir*base, min, max);
+    force.value = String(next);
+    force.dispatchEvent(new Event('input', {bubbles:true}));
+  }, {passive:false});
+})();
+
+
+// === FIX: Press-and-hold on +/- buttons (keeps onclick too) ===
+(function(){
+  const btns = Array.from(document.querySelectorAll('.pmwrap .pm'));
+  if(!btns.length) return;
+
+  function parseDeltaFromOnclick(el){
+    const oc = el.getAttribute('onclick') || "";
+    const m = oc.match(/stepAdjust\(\s*'([^']+)'\s*,\s*([+-]?\d+)\s*\)/);
+    if(!m) return null;
+    return {id:m[1], delta: parseInt(m[2],10)};
+  }
+
+  btns.forEach(btn=>{
+    const info = parseDeltaFromOnclick(btn);
+    if(!info) return;
+
+    let timer = null;
+    let running = false;
+    let interval = 140;
+
+    const tick = ()=>{
+      try{ stepAdjust(info.id, info.delta); }catch(e){}
+      interval = Math.max(55, interval*0.92);
+      timer = setTimeout(tick, interval);
+    };
+
+    const start = ()=>{
+      if(running) return;
+      running = true;
+      interval = 140;
+      timer = setTimeout(tick, 240);
+    };
+
+    const stop = ()=>{
+      running = false;
+      if(timer){ clearTimeout(timer); timer = null; }
+    };
+
+    btn.addEventListener('mousedown', start);
+    btn.addEventListener('touchstart', (e)=>{ e.preventDefault(); start(); }, {passive:false});
+    window.addEventListener('mouseup', stop);
+    window.addEventListener('touchend', stop);
+    window.addEventListener('blur', stop);
+    btn.addEventListener('mouseleave', stop);
+  });
+})();
+
 </script>
 </body>
 </html>
